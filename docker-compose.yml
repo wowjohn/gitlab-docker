@@ -1,0 +1,31 @@
+version: '3'
+services:
+  gitlab:
+    image: gitlab/gitlab-ce
+    container_name: gitlab
+    hostname: my.gitlab.com
+    volumes:
+      - ./srv/gitlab/config:/etc/gitlab
+      - ./srv/gitlab/logs:/var/log/gitlab
+      - ./srv/gitlab/data:/var/opt/gitlab
+    ports:
+      - 22:22
+      - 80:80
+      - 443:443
+    environment:
+      GITLAB_OMNIBUS_CONFIG:
+        external_url 'http://my.gitlab.com'
+    privileged: true
+    restart: always
+
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner
+    volumes:
+      - ./srv/gitlab-runner/config:/etc/gitlab-runner
+      - ./var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    privileged: true
+    links:
+        - gitlab:my.gitlab.com
+
