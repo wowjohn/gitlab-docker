@@ -36,3 +36,4 @@ gitlab搭建
 ### 备注
 > 虚拟域名为 my.gitlab.com
 > 初次登录需要键入超级管理员密码，用户名默认为root
+> docker pull gitlab镜像时，提示需要登录，键入docker-login ,账户名选择docker的用户名，不能是邮箱！！！不能是邮箱！！！不能是邮箱！！！（为了这个问题折腾了好久）
